@@ -34,34 +34,39 @@ if __name__ == "__main__":
         cl = CompLatent()
         cl.load_training_config()
 
-        with open("output.txt", "w+") as f:
-            for num_test_samples in [5, 10, 20, 50]:
-                for _ in range(3):
-                    lb = random.randint(0, total_samples - num_test_samples - 1)
-                    assert (
-                        lb >= 0
-                        and lb < total_samples
-                        and (lb + num_test_samples) < total_samples
-                    )
+        f = open("output.txt", "w+")
+        f.close()
 
-                    data_curr, labels_curr, subjects_curr = (
-                        data[lb : (lb + num_test_samples)],
-                        labels[lb : (lb + num_test_samples)],
-                        subjects[lb : (lb + num_test_samples)],
-                    )
+        for num_test_samples in [1, 5, 10]:
+            for _ in range(5):
+                lb = random.randint(0, total_samples - num_test_samples - 1)
+                assert (
+                    lb >= 0
+                    and lb < total_samples
+                    and (lb + num_test_samples) < total_samples
+                )
 
-                    avg_len = get_avg_len(data_curr)
+                data_curr, labels_curr, subjects_curr = (
+                    data[lb : (lb + num_test_samples)],
+                    labels[lb : (lb + num_test_samples)],
+                    subjects[lb : (lb + num_test_samples)],
+                )
 
-                    num_iters = 1
-                    execution_time = timeit.timeit(
-                        lambda: cl.get_predictions(data_curr),
-                        number=num_iters,
-                    )
-                    execution_time /= num_iters
-                    print(
-                        f"Execution time for {num_test_samples} samples and avg len {avg_len}: {execution_time} seconds"
-                    )
-                    f.write(f"{num_test_samples} {avg_len} {execution_time}\n")
+                avg_len = get_avg_len(data_curr)
+
+                num_iters = 1
+                execution_time = timeit.timeit(
+                    lambda: cl.get_predictions(data_curr),
+                    number=num_iters,
+                )
+                execution_time /= num_iters
+                print(
+                    f"Execution time for {num_test_samples} samples and avg len {avg_len}: {execution_time} seconds"
+                )
+                
+                f = open("output.txt", "a+")
+                f.write(f"{num_test_samples} {avg_len} {execution_time}\n")
+                f.close()
 
         
 
