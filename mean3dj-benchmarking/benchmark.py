@@ -5,7 +5,7 @@ import warnings
 import data.read as data_read
 import data.utils as data_utils
 import constants
-from dam import DAM
+from mean3dj import Mean3DJ
 
 def get_avg_len(sequences):
     lens = [sequence.shape[0] for sequence in sequences]
@@ -31,8 +31,8 @@ if __name__ == "__main__":
 
         total_samples = len(data)
 
-        dam = DAM()
-        dam.load_training_config()
+        m3dj = Mean3DJ()
+        m3dj.load_training_config()
 
 
         with open("output.txt", "w+") as f:
@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
                     num_iters = 3
                     execution_time = timeit.timeit(
-                        lambda: dam.get_predictions(data_curr),
+                        lambda: m3dj.get_predictions(data_curr),
                         number=num_iters,
                     )
                     execution_time /= num_iters

@@ -4,7 +4,7 @@ from sklearn.metrics import accuracy_score
 import data.read as data_read
 import data.utils as data_utils
 import constants
-from dam import DAM
+from mean3dj import Mean3DJ
 
 
 if __name__ == "__main__":
@@ -17,9 +17,9 @@ if __name__ == "__main__":
 
     with warnings.catch_warnings():
         warnings.simplefilter("ignore")
-        dam = DAM()
-        dam.load_training_config()
-        predictions = dam.get_predictions(data)
+        m3dj = Mean3DJ()
+        m3dj.load_training_config()
+        predictions = m3dj.get_predictions(data)
         print('Predictions:', predictions)
         print('Labels:', labels)
         print('Accuracy:', accuracy_score(predictions, labels))
