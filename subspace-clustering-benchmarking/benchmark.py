@@ -37,7 +37,7 @@ if __name__ == "__main__":
 
         with open("output.txt", "w+") as f:
             for num_test_samples in [5, 10, 20, 50, 100]:
-                for _ in range(5):
+                for _ in range(3):
                     lb = random.randint(0, total_samples - num_test_samples - 1)
                     assert (
                         lb >= 0
@@ -53,7 +53,7 @@ if __name__ == "__main__":
 
                     avg_len = get_avg_len(data_curr)
 
-                    num_iters = 3
+                    num_iters = 1
                     execution_time = timeit.timeit(
                         lambda: dam.get_predictions(data_curr, labels_curr),
                         number=num_iters,
