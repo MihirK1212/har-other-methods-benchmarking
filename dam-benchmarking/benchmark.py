@@ -54,7 +54,7 @@ if __name__ == "__main__":
 
                 avg_len = get_avg_len(data_curr)
 
-                num_iters = 1
+                num_iters = 2
                 execution_time = timeit.timeit(
                     lambda: dam.get_predictions(data_curr),
                     number=num_iters,
